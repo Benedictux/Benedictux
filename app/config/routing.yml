@@ -2,4 +2,4 @@
 
 app:
     resource: "@AppBundle/Controller/"
-    type:     annotation
+    type:     annotation #nécessaire pour activer le lecteur d'Annotation pour cette ressource.

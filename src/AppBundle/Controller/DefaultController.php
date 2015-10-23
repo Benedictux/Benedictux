@@ -33,7 +33,7 @@ class DefaultController extends Controller
     public function showAction(Post $post)
     {
         return $this->render('default/show.html.twig', array(
-          'post' => $post
+          'post'   => $post
           ));
     }
 
@@ -75,7 +75,7 @@ class DefaultController extends Controller
             );
         }
 
-        $post->setTitle('New post name!');
+        $post->setTitle('New post name');
         $slug = $this->get('app.slugger')->slugify($post->getTitle());
         $post->setSlug($slug);
 

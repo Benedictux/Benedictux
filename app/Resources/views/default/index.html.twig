@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block bodySite %}
+    <h1>Posts récents</h1>
     {% for post in posts %}
-        <a href="{{ path('show_post', { slug: post.slug }) }}"><h1>{{ post.title }}</h1></a>
-        <h2>{{ post.slug }}</h2>
-        <h3>{{ post.authorEmail }}</h3>
-            <p>{{ post.content }}</p>
+        {{ include('post/post_details.html.twig', { 'post': post }) }}
     {% endfor %}
 {% endblock %}
 
