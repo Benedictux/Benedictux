@@ -2,12 +2,11 @@
 
 {% block body %}
     {% for post in posts %}
-        <h1>{{ post.title }}</h1>
+        <a href="{{ path('show_post', { slug: post.slug }) }}"><h1>{{ post.title }}</h1></a>
         <h2>{{ post.slug }}</h2>
         <h3>{{ post.authorEmail }}</h3>
             <p>{{ post.content }}</p>
     {% endfor %}
-
 {% endblock %}
 
 {% block stylesheets %}
