@@ -8,7 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use AppBundle\Entity\Post;//Need for createAction
+use AppBundle\Entity\Post;
+use AppBundle\Form\Type\PostType;
 
 class PostController extends Controller
 {
@@ -44,18 +45,9 @@ class PostController extends Controller
     {
         // just setup a fresh $post object (remove the dummy data)
         $post = new Post();
+        $form = $this->createForm(new PostType(), $post);
 
-        $form = $this->createFormBuilder($post)
-            ->add('title', 'text')
-            ->add('content', 'textarea')
-            ->add('authorEmail','email')
-            ->add('published', 'checkbox')
-            ->add('save', 'submit', array('label' => 'Create Post'))
-            ->getForm(); // Génère le formulaire
-
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
+        if ($form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
                 $slug = $this->get('app.slugger')->slugify($post->getTitle());
