@@ -1,0 +1,7 @@
+{# app/Resources/views/app/post_details.html.twig #}
+
+<a href="{{ path('show_post', { slug: post.slug }) }}"><h2>{{ post.title }}</h2></a>
+    <h3>{{ post.slug }}</h3>
+        <h4>by {{ post.authorEmail }}
+        	<time datetime="{{ post.publishedAt | date('c') }}"> at {{ post.publishedAt | localizeddate('full', 'short') }}</time></h4>
+            <p>{{ post.content | truncate(200, true, '...') }}</p>

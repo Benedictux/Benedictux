@@ -42,6 +42,11 @@ class Post
     private $authorEmail;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $published = true;
+    
+    /**
      * @ORM\Column(type="datetime")
      */
     private $publishedAt;
@@ -171,6 +176,30 @@ class Post
     }
 
     /**
+     * Set published
+     *
+     * @param boolean $published
+     *
+     * @return Post
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return boolean
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    /**
      * Set publishedAt
      *
      * @param \DateTime $publishedAt
@@ -193,4 +222,5 @@ class Post
     {
         return $this->publishedAt;
     }
+
 }

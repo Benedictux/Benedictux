@@ -1,0 +1,13 @@
+{# app/Resources/views/app/postIndex.html.twig #}
+
+{% extends 'app/layout.html.twig' %}
+
+{% block bodySite %}
+    <h1>Posts récents</h1>
+    {% for post in posts %}
+        {{ include('app/post_details.html.twig', { 'post': post }) }}
+    {% endfor %}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
