@@ -4,7 +4,11 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+            {% stylesheets output="css/app.css"
+                "%kernel.root_dir%/Resources/assets/css/*"
+             %}
+                <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+            {% endstylesheets %}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -15,7 +19,7 @@
                     <div class="navbar navbar-default navbar-static-top" role="navigation">
                         <div class="container">
                             <div class="navbar-header">
-                                <a class="navbar-brand" href="{{ path('homepage') }}">
+                                <a class="navbar-brand" href="{{ path('accueil') }}">
                                     Benedictux
                                 </a>
                             </div>
