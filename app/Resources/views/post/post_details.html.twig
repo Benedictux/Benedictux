@@ -1,6 +1,0 @@
-{# app/Resources/views/post/post_details.html.twig #}
-<a href="{{ path('show_post', { slug: post.slug }) }}"><h2>{{ post.title }}</h2></a>
-    <h3>{{ post.slug }}</h3>
-        <h4>by {{ post.authorEmail }}
-        	{#<time datetime="{{ post.publishedAt | date('c') }}"> at {{ post.publishedAt | localizeddate('full', 'none') }}</time></h4>#}
-            <p>{{ post.content }}</p>
