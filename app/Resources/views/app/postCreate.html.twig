@@ -1,4 +1,8 @@
 {# app/Resources/views/app/postCreate.html.twig #}
+
 {{ form_start(form) }}
-{{ form_widget(form) }}
+    {{ form_widget(form) }}
+
+    <input type="submit" value="Create post"
+           class="btn btn-default pull-right" />
 {{ form_end(form) }}

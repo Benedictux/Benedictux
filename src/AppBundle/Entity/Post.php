@@ -51,6 +51,11 @@ class Post
      */
     private $publishedAt;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
    // /**
    //  * @ORM\OneToMany(
    //  *      targetEntity="Comment",
@@ -223,4 +228,27 @@ class Post
         return $this->publishedAt;
     }
 
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Post
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
 }

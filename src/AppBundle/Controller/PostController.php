@@ -47,7 +47,7 @@ class PostController extends Controller
         $post = new Post();
         $form = $this->createForm(new PostType(), $post);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->handleRequest($request)->isSubmitted() && $form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
                 $slug = $this->get('app.slugger')->slugify($post->getTitle());
@@ -78,12 +78,20 @@ class PostController extends Controller
             );
         }
 
-        $post->setTitle('New post name');
-        $slug = $this->get('app.slugger')->slugify($post->getTitle());
-        $post->setSlug($slug);
+        $form = $this->createForm(new PostType(), $post);
 
-        $em->flush();
+        if ($form->handleRequest($request)->isSubmitted() && $form->handleRequest($request)->isValid()) {
+            $slug = $this->get('app.slugger')->slugify($post->getTitle());
+            $post->setSlug($slug);
+            $post->setUpdatedAt(new \DateTime());
 
-        return $this->redirectToRoute('index');
+            $em->flush();
+
+            return $this->redirectToRoute('accueil');
+        }
+
+        return $this->render('app/postUpdate.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 }

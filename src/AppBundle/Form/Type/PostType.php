@@ -15,7 +15,6 @@ class PostType extends AbstractType
             ->add('content', 'textarea')
             ->add('authorEmail','email')
             ->add('published', 'checkbox')
-            ->add('save', 'submit', array('label' => 'Create Post'))
         ;
     }
 
