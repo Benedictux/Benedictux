@@ -1,0 +1,11 @@
+{# app/Resources/views/app/postUpdate.html.twig #}
+{% extends 'app/layout.html.twig' %}
+
+{% block bodySite %}
+	{{ form_start(form) }}
+	    {{ form_widget(form) }}
+
+	    <input type="submit" value="Update post"
+	           class="btn btn-default pull-right" />
+	{{ form_end(form) }}
+{% endblock %}
