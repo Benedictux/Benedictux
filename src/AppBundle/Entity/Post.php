@@ -42,7 +42,7 @@ class Post
     private $authorEmail;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $published = true;
     

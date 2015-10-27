@@ -1,8 +1,9 @@
 body{
+	margin:0px;
 	background-color: #252525;
 	color: #f1f1f1;
   	font-family: "Trebuchet MS", Verdana, Geneva, Arial;
 }
 
-#headerSite, #footerSite{width:100%; background-color: blue;}
-#bodySite{width:80%; margin:auto; background-color: red;}
+#headerSite header, #contentSite section, #footerSite footer{width:75%; margin:auto;}
+#headerSite, #footerSite{background-color: #121212;}

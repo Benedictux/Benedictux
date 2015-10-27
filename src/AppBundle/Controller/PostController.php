@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use AppBundle\Entity\Post;
 use AppBundle\Form\Type\PostType;
+use AppBundle\Form\Type\PostEditType;
 
 class PostController extends Controller
 {
@@ -47,7 +48,8 @@ class PostController extends Controller
         $post = new Post();
         $form = $this->createForm(new PostType(), $post);
 
-        if ($form->handleRequest($request)->isSubmitted() && $form->handleRequest($request)->isValid()) {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
                 $slug = $this->get('app.slugger')->slugify($post->getTitle());
@@ -65,22 +67,22 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/update/{id}", name="update_post")
+     * @Route("/update/{slug}", name="update_post")
      */
-    public function updateAction($id)
+    public function updateAction(Post $post, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository('AppBundle:Post')->find($id);
 
         if (!$post) {
             throw $this->createNotFoundException(
-                'No post found for id '.$id
+                'No post found'
             );
         }
 
-        $form = $this->createForm(new PostType(), $post);
+        $form = $this->createForm(new PostEditType(), $post);
 
-        if ($form->handleRequest($request)->isSubmitted() && $form->handleRequest($request)->isValid()) {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $slug = $this->get('app.slugger')->slugify($post->getTitle());
             $post->setSlug($slug);
             $post->setUpdatedAt(new \DateTime());
@@ -92,6 +94,35 @@ class PostController extends Controller
 
         return $this->render('app/postUpdate.html.twig', array(
             'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/delete/{slug}", name="delete_post")
+     */
+    public function deleteAction(Post $post, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        if (null === $post) {
+            throw new NotFoundHttpException("Ce Post n'existe pas.");
+        }
+
+        // On crée un formulaire vide, qui ne contiendra que le champ CSRF
+        // Cela permet de protéger la suppression d'annonce contre cette faille
+        $form = $this->createFormBuilder()->getForm();
+
+        if ($form->handleRequest($request)->isValid()) {
+            $em->remove($post);
+            $em->flush();
+            $request->getSession()->getFlashBag()->add('info', "Le post a bien été supprimé.");
+            return $this->redirectToRoute('accueil');
+        }
+
+        // Si la requête est en GET, on affiche une page de confirmation avant de supprimer
+        return $this->render('app/postDelete.html.twig', array(
+            'post' => $post,
+            'form'   => $form->createView()
         ));
     }
 }

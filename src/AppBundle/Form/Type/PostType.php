@@ -1,6 +1,5 @@
 <?php
 // src/AppBundle/Form/Type/PostType.php
-
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;

@@ -14,8 +14,8 @@
     </head>
     <body>
         <div id="headerSite">
-            {% block headerSite %}
-                <header>
+            <header>
+                {% block headerSite %}
                     <div class="navbar navbar-default navbar-static-top" role="navigation">
                         <div class="container">
                             <div class="navbar-header">
@@ -25,22 +25,22 @@
                             </div>
                         </div>
                     </div>
-                </header>
-            {% endblock %}
+                {% endblock %}
+            </header>
         </div>
 
         <div id="contentSite">
-            {% block bodySite %}
-                <section>
-                </section>
-            {% endblock %}
+            <section>
+                {% block bodySite %}
+                {% endblock %}
+            </section>
         </div>
 
         <div id="footerSite">
-            {% block footerSite %}
-                <footer>
-                </footer>
-            {% endblock %}
+            <footer>
+                {% block footerSite %}
+                {% endblock %}
+            </footer>
         </div>
         {% block javascripts %}{% endblock %}
     </body>
