@@ -46,7 +46,12 @@ class PostController extends Controller
     {
         // just setup a fresh $post object (remove the dummy data)
         $post = new Post();
+        $post->setAuthorEmail('dipsetm12@hotmail.fr');
         $form = $this->createForm(new PostType(), $post);
+
+        //$data = $this->get('app.scanner')->scanDirectory($_SERVER['DOCUMENT_ROOT'].'Benedictux/web/uploads');
+        //$data = $this->get('app.scanner')->scanDirectory($this->get('request')->getBasePath());
+        //$scanned_directory = array_diff(scandir('./web'), array('..', '.'));
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -54,6 +59,14 @@ class PostController extends Controller
 
                 $slug = $this->get('app.slugger')->slugify($post->getTitle());
                 $post->setSlug($slug);
+    
+                if (get_magic_quotes_gpc()) {
+                    $content = stripslashes($post->getContent());
+                    $content = $this->get('app.parser')->parserTexarea($content);
+                    $post->setContent($content);}
+                else{
+                    $content = $this->get('app.parser')->parserTexarea($post->getContent());
+                    $post->setContent($content);}
 
             $em->persist($post);
             $em->flush();
@@ -63,6 +76,7 @@ class PostController extends Controller
 
         return $this->render('app/postCreate.html.twig', array(
             'form' => $form->createView(),
+            //'data' => $data,
         ));
     }
 

@@ -3,3 +3,8 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation #nécessaire pour activer le lecteur d'Annotation pour cette ressource.
+
+# Routes du KMS editor bundle
+kms_froala_editor:
+    resource: "@KMSFroalaEditorBundle/Resources/config/routing.yml"
+    prefix:   /froalaeditor

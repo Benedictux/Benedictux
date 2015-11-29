@@ -14,6 +14,12 @@ services:
 # Mon service slugger permettant de remplacer dans les slug, les espaces par des -.
     app.slugger:
         class: AppBundle\Utils\Slugger
+# Mon service scanner, parcour des dossiers.
+    app.scanner:
+        class: AppBundle\Utils\Scanner
+# Mon service parser transforme mon code textarea en balise html.
+    app.parser:
+        class: AppBundle\Utils\Parser
 
 # These are the Twig extensions that create new filters and functions for
 # using them in the templates

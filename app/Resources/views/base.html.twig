@@ -22,6 +22,9 @@
                                 <a class="navbar-brand" href="{{ path('accueil') }}">
                                     Benedictux
                                 </a>
+                                <a class="navbar-brand" href="{{ path('contact') }}">
+                                    Contact
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -42,6 +45,9 @@
                 {% endblock %}
             </footer>
         </div>
-        {% block javascripts %}{% endblock %}
+        {% javascripts 
+            "js/main.js" %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
     </body>
 </html>

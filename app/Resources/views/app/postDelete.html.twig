@@ -7,16 +7,16 @@
 
 
 {% block bodySite %}
-  <h2>Supprimer un post</h2>
+  <h1>Supprimer un post</h1>
   <p>
     Etes-vous certain de vouloir supprimer le post "{{ post.title }}" ?
   </p>
 
   {# On met l'id du post dans la route de l'action du formulaire #}
-  <form action="{{ path('oc_platform_delete', {'id': post.id}) }}" method="post">
-    <a href="{{ path('oc_platform_view', {'id': post.id}) }}" class="btn btn-default">
+  <form action="{{ path('delete_post', {'slug': post.slug}) }}" method="post">
+    <a href="{{ path('show_post', {'slug': post.slug}) }}" class="btn btn-default">
       <i class="glyphicon glyphicon-chevron-left"></i>
-      Retour à l'annonce
+      Retour au post
     </a>
     {# Ici j'ai écrit le bouton de soumission à la main #}
     <input type="submit" value="Supprimer" class="btn btn-danger" />

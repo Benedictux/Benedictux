@@ -7,9 +7,43 @@
 
 {% block bodySite %}
 	{{ form_start(form) }}
-	    {{ form_widget(form) }}
+		{{ form_errors(form) }}
+	  	<table id="post-identite-table-form" class="post-table-form">
+	        <tr>
+	          <th>{{ form_label(form.title, "Titre") }}</th>
+	        </tr>
+	        <tr>
+	          <td class="popup">
+	            {{ form_errors(form.title) }}
+	            <span class="spanPopup">Le titre du post, ex: Mon post.</span>
+	            {{ form_widget(form.title) }}
+	          </td>
+	        </tr>
+	        <tr>
+	          <th>{{ form_label(form.content, "Contenue") }}</th>
+	        </tr>
+	        <tr>
+	          <td class="popup">
+	            {{ form_errors(form.content) }}
+	            <span class="spanPopup">Rédiger le contenue du post.</span>
+	            {{ form_widget(form.content) }}
+	          </td>
+	        </tr>
+      	</table>
 
-	    <input type="submit" value="Create post"
-	           class="btn btn-default pull-right" />
+      	<table>
+	        <tr>
+	          <td>
+	            {{ form_rest(form) }} {# Génération des champs pas encore écrits, mais aussi le champ CSRF (géré automatiquement par Symfony !) et tous les champs cachés (type « hidden »). #}
+	          </td>
+	        </tr>
+      	</table>
+      	
+      	<input type="submit" value="Create post" id="btn-submit" class="btn btn-default pull-right" />
 	{{ form_end(form) }}
+
+	{# {% for file in data %}
+        <pre>{{ file }}</pre>
+    {% endfor %}
+	#}
 {% endblock %}

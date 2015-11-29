@@ -1,6 +1,5 @@
 <?php
 // src/AppBundle/Entity/Post.php
-
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -22,7 +21,7 @@ class Post
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=200)
+     * @ORM\Column(type="string", length=200, unique=true)
      */
     private $title;
 
@@ -71,8 +70,6 @@ class Post
         $this->publishedAt = new \DateTime();
         //$this->comments = new ArrayCollection();
     }
-
-    // getters and setters ...
 
     /**
      * Get id

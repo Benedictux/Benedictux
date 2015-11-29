@@ -1,7 +1,17 @@
 {# app/Resources/views/app/post_details.html.twig #}
 
-<a href="{{ path('show_post', { slug: post.slug }) }}"><h2>{{ post.title }}</h2></a>
+<a href="{{ path('show_post', { slug: post.slug }) }}"><h2>{{ post.title | upper }}</h2></a>
     <h3>{{ post.slug }}</h3>
-        <h4>by {{ post.authorEmail }}
-        	<time datetime="{{ post.publishedAt | date('c') }}"> at {{ post.publishedAt | localizeddate('full', 'short') }}</time></h4>
-            <p>{{ post.content | truncate(200, true, '...') }}</p>
+        <h4>
+        	 by {{ post.authorEmail }}
+        	{% if post.updatedAt %}
+        		<time datetime="{{ post.updatedAt | date('c') }}">
+        			updated at {{ post.updatedAt | localizeddate('full', 'short') }}
+        		</time>
+        	{% else %}
+	        	<time datetime="{{ post.publishedAt | date('c') }}">
+	        		published at {{ post.publishedAt | localizeddate('full', 'short') }}
+	        	</time>
+        	{% endif %}
+        </h4>
+            <p>{{ post.content | truncate(200, true, '...') | raw }}</p>

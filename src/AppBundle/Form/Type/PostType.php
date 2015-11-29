@@ -10,10 +10,20 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text')
-            ->add('content', 'textarea')
-            ->add('authorEmail','email')
-            ->add('published', 'checkbox')
+            ->add('title', 'text', array(
+                'attr' => array (
+                    'class' => 'select'
+                    )))
+            ->add('content', 'textarea', array(
+                'attr' => array(
+                    'id' => 'textarea',
+                    'class' => 'textarea',
+                    'cols' => 100,
+                    'rows' => 30
+                    )))
+            ->add('published', 'checkbox', array(
+                'required' => false,
+                ))
         ;
     }
 
