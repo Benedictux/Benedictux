@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Finder\Finder;
 
 use AppBundle\Entity\Post;
 use AppBundle\Form\Type\PostType;
@@ -49,7 +50,9 @@ class PostController extends Controller
         $post->setAuthorEmail('dipsetm12@hotmail.fr');
         $form = $this->createForm(new PostType(), $post);
 
-        //$data = $this->get('app.scanner')->scanDirectory($_SERVER['DOCUMENT_ROOT'].'Benedictux/web/uploads');
+$finder = new Finder();
+$data = $finder->files()->in($_SERVER['DOCUMENT_ROOT'].'Benedictux/web/upload');
+        //$data = $this->get('app.scanner')->scanDir($_SERVER['DOCUMENT_ROOT'].'Benedictux/web/uploads');
         //$data = $this->get('app.scanner')->scanDirectory($this->get('request')->getBasePath());
         //$scanned_directory = array_diff(scandir('./web'), array('..', '.'));
 
@@ -76,7 +79,7 @@ class PostController extends Controller
 
         return $this->render('app/postCreate.html.twig', array(
             'form' => $form->createView(),
-            //'data' => $data,
+            'data' => $data,
         ));
     }
 

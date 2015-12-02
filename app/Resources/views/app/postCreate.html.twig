@@ -42,8 +42,10 @@
       	<input type="submit" value="Create post" id="btn-submit" class="btn btn-default pull-right" />
 	{{ form_end(form) }}
 
-	{# {% for file in data %}
+	{% for file in data %}
         <pre>{{ file }}</pre>
-    {% endfor %}
-	#}
+   		<img src="{{asset(file)}}">
+   		<img src="{{asset('upload/Klaus.png')}}">
+   {% endfor %}
+
 {% endblock %}

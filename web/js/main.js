@@ -21,7 +21,7 @@ function preview(textareaId, previewDiv) {
       field = field.replace(/&lt;cite&gt;([\s\S]*?)&lt;\/cite&gt;/g, '<cite>$1</cite>');
       field = field.replace(/&lt;lien&gt;([\s\S]*?)&lt;\/lien&gt;/g, '<a href="$1">$1</a>');
       field = field.replace(/&lt;lien url="([\s\S]*?)"&gt;([\s\S]*?)&lt;\/lien&gt;/g, '<a href="$1" title="$2">$2</a>');
-      field = field.replace(/&lt;image&gt;([\s\S]*?)&lt;\/image&gt;/g, '<img src="$1" alt="Image" />');
+      field = field.replace(/&lt;image&gt;([\s\S]*?)&lt;\/image&gt;/g, '<img src="{{ asset($1) }}" alt="Image" /></img>');
       field = field.replace(/&lt;citation nom=\"(.*?)\"&gt;([\s\S]*?)&lt;\/citation&gt;/g, '<blockquote class="citation"><q>$2</q><footer>- par $1</footer></blockquote>');
       field = field.replace(/&lt;citation lien=\"(.*?)\"&gt;([\s\S]*?)&lt;\/citation&gt;/g, '<blockquote class="citation" cite="$1"><q>$2</q><footer>- $1</footer></blockquote>');
       field = field.replace(/&lt;citation nom=\"(.*?)\" lien=\"(.*?)\"&gt;([\s\S]*?)&lt;\/citation&gt;/g, '<blockquote class="citation" cite="$2"><q>$3</q><footer>- $2 par $1</footer></blockquote>');

@@ -23,4 +23,11 @@ class Scanner
     }
     return $entites;
   }
+
+  public function scanDir($directory)
+  {  
+    $iterator = new FilesystemIterator($directory, FilesystemIterator::SKIP_DOTS);
+
+    return $iterator;
+  }
 }
